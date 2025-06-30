@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wire84 - MORNING ALPHA REPORT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset styles */
+    body, p, h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: #000000;
+      color: #f3f4f6;
+      font-family: 'Source Code Pro', monospace;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      line-height: 1.5;
+    }
+
+    /* Container styles */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #000000;
+      padding: 32px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #374151;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .section {
+      background-color: rgba(17, 24, 39, 0.3);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      color: #ef4444;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .metric-card h4 {
+      color: #f3f4f6;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .positive { color: #22c55e; }
+    .neutral { color: #eab308; }
+    .negative { color: #ef4444; }
+
+    .sentiment-bar {
+      height: 24px;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+
+    .sentiment-positive {
+      background: linear-gradient(90deg, rgba(34, 197, 94, 0.2) 46.7%, transparent 46.7%);
+    }
+
+    .sentiment-neutral {
+      background: linear-gradient(90deg, rgba(234, 179, 8, 0.2) 33.3%, transparent 33.3%);
+    }
+
+    .sentiment-negative {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 20%, transparent 20%);
+    }
+
+    .alert {
+      background-color: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .alert h3 {
+      color: #ef4444;
+      margin-bottom: 8px;
+    }
+
+    .alert p {
+      color: #9ca3af;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .matrix-cell {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .matrix-cell h4 {
+      color: #f3f4f6;
+      margin-bottom: 8px;
+    }
+
+    .matrix-cell p {
+      color: #9ca3af;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      margin-right: 8px;
+    }
+
+    .tag-high {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .tag-medium {
+      background-color: rgba(234, 179, 8, 0.1);
+      color: #eab308;
+    }
+
+    .tag-low {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .headline {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .headline-content {
+      flex: 1;
+    }
+
+    .headline-sentiment {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #374151;
+    }
+
+    .data-table th {
+      color: #9ca3af;
+      font-weight: 600;
+    }
+
+    .chart {
+      width: 100%;
+      height: 200px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(239, 68, 68, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+      mask: linear-gradient(90deg, transparent 0%, black 50%, transparent 100%);
+      animation: pulse 2s infinite;
+    }
+
+    .conviction-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .conviction-table th,
+    .conviction-table td {
+      padding: 6px;
+      text-align: center;
+      border: 1px solid #374151;
+    }
+
+    .conviction-table th {
+      color: #9ca3af;
+      font-weight: 600;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(34, 197, 94, 0.2);
+      border-radius: 4px;
+      margin: 4px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+
+    /* Responsive styles */
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
+      
+      .grid, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      .matrix {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #000000;
+        color: #f3f4f6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with Logo -->
+    <header class="header">
+      <svg viewBox="0 0 110 60" style="width: 60px; height: 60px; margin: 0 auto 20px;">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <path d="M5.73 36.91C9.55 41.07 14.91 45.87 20.85 49.65 32.78 57.24 46.87 59.43 55.26 59.43 63.57 59.43 77.39 57.17 89.12 49.65 95.1 45.81 100.37 41.2 104.19 37.04 107.68 33.25 110 29.72 110 29.72 110 29.72 108.01 26.49 104.19 22.42 100.52 18.49 95.14 13.8 89.12 10.01 77.81 2.9 63.13 0 55.26 0 46.88 0 32.78 2.42 20.85 10.01 14.93 13.78 9.55 18.42 5.73 22.52 2.19 26.32 0 29.72 0 29.72 0 29.72 2.22 33.08 5.73 36.91Z" fill="#FFFFFF" transform="translate(55.000000, 29.715640) scale(-1, 1) translate(-55.000000, -29.715640)"/>
+          <path d="M55.26 59.43C71.67 59.43 84.98 46.13 84.98 29.72 84.98 13.3 71.67 0 55.26 0 38.85 0 25.55 13.3 25.55 29.72 25.55 46.13 38.85 59.43 55.26 59.43Z" fill="#FFEE00"/>
+          <circle fill="#ffa500" cx="55.26" cy="29.72" r="22.42"/>
+          <path d="M55.26 44.31C63.32 44.31 69.86 37.78 69.86 29.72 69.86 21.65 63.32 15.12 55.26 15.12 47.2 15.12 40.66 21.65 40.66 29.72 40.66 37.78 47.2 44.31 55.26 44.31Z" fill="#FF0000"/>
+          <circle fill="#FFFFFF" opacity="0.2" cx="55.26" cy="29.72" r="12"/>
+          <circle fill="#ffffff" opacity="0.3" cx="50" cy="25" r="3"/>
+        </g>
+      </svg>
+      <h1>wire84 - MORNING ALPHA REPORT</h1>
+      <p>Monday, March 10, 2025 | RESTRICTED DISTRIBUTION - Clarity Capital MANAGEMENT</p>
+    </header>
+
+    <!-- Enhanced Introduction Section -->
+    <section class="section">
+      <p style="color: #9ca3af; margin-bottom: 16px;">Hi William,</p>
+      <p style="color: #9ca3af; margin-bottom: 16px;"><em>wire84</em> Market Intelligence Briefing - Monday, March 10, 2025</p>
+      <p style="color: #9ca3af; margin-bottom: 16px;">
+        As we commence trading this second week of March 2025, global financial markets are grappling with the profound implications of escalating geopolitical tensions, a hawkish pivot from major central banks, and the looming specter of stagflation. Against this backdrop, today's <em>wire84</em> delves into the nuanced interplay between rising sovereign bond yields, widening credit spreads, and the repricing of risk assets across the liquidity spectrum.
+      </p>
+      <p style="color: #9ca3af; margin-bottom: 16px;">
+        Our quantitative analysis uncovers nascent signs of stress in key funding markets, while our derivatives team highlights emerging opportunities to capitalize on the volatility term structure and cross-asset dispersion trades. Particular attention is drawn to the semiconductor sector, where our satellite imagery analysis reveals significant production disruptions that could impact global supply chains.
+      </p>
+      <div class="matrix" style="margin-top: 24px;">
+        <div class="matrix-cell">
+          <h4>Market Phase</h4>
+          <p>Late Cycle</p>
+          <p style="color: #9ca3af; font-size: 12px;">High volatility regime</p>
+        </div>
+        <div class="matrix-cell">
+          <h4>Risk Appetite</h4>
+          <p class="neutral">Neutral</p>
+          <p style="color: #9ca3af; font-size: 12px;">Trending negative</p>
+        </div>
+        <div class="matrix-cell">
+          <h4>Liquidity</h4>
+          <p class="negative">Deteriorating</p>
+          <p style="color: #9ca3af; font-size: 12px;">-15% MoM</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Market Sentiment Section -->
+    <section class="section">
+      <h2 class="section-title">📊 MARKET SENTIMENT ANALYSIS</h2>
+      
+      <div class="grid">
+        <div class="metric-card">
+          <h4>Sentiment Distribution</h4>
+          <div>
+            <p>🟢 Positive: 46.7%</p>
+            <div class="sentiment-bar sentiment-positive"></div>
+            <p>🟡 Neutral: 33.3%</p>
+            <div class="sentiment-bar sentiment-neutral"></div>
+            <p>🔴 Negative: 20.0%</p>
+            <div class="sentiment-bar sentiment-negative"></div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <h4>Key Metrics</h4>
+          <div style="margin-bottom: 16px;">
+            <p>Overall Sentiment</p>
+            <span class="metric-value positive">+0.12σ</span>
+          </div>
+          <div>
+            <p>Dispersion</p>
+            <span class="metric-value neutral">0.74</span>
+          </div>
+          <div style="font-size: 12px; color: #9ca3af; margin-top: 8px;">
+            Dispersion above 12-month avg of 0.51
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Sentiment Drivers</h3>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="metric-card">
+            <h4>Monetary Policy</h4>
+            <p class="negative">Hawkish</p>
+            <p style="color: #9ca3af; font-size: 12px;">75% prob. of hike</p>
+          </div>
+          <div class="metric-card">
+            <h4>Economic Data</h4>
+            <p class="positive">Strong</p>
+            <p style="color: #9ca3af; font-size: 12px;">Above consensus</p>
+          </div>
+          <div class="metric-card">
+            <h4>Geopolitical Risk</h4>
+            <p class="negative">Elevated</p>
+            <p style="color: #9ca3af; font-size: 12px;">Multiple hotspots</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: #f3f4f6; margin: 24px 0 16px;">Headlines by Impact</h3>
+      
+      <div style="margin-bottom: 16px;">
+        <h4 style="margin-bottom: 8px; color: #d1d5db;">High Impact</h4>
+        <div class="headline">
+          <span class="headline-sentiment">🟢</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">S&P 500 posts best weekly gain in two months as earnings optimism prevails [0.68]</p>
+            <span class="tag tag-high">High Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟡</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Treasury yields fluctuate amid mixed economic data releases [0.08]</p>
+            <span class="tag tag-high">High Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🔴</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Geopolitical tensions weigh on risk appetite, driving flight to safety [-0.59]</p>
+            <span class="tag tag-high">High Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="margin-bottom: 8px; color: #d1d5db;">Medium Impact</h4>
+        <div class="headline">
+          <span class="headline-sentiment">🟢</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Tech mega-caps lead market rally on strong ad revenue growth [0.55]</p>
+            <span class="tag tag-medium">Medium Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟢</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Robust retail sales data bolsters confidence in consumer spending [0.42]</p>
+            <span class="tag tag-medium">Medium Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟡</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Oil prices trade in narrow range as supply/demand dynamics remain balanced [0.02]</p>
+            <span class="tag tag-medium">Medium Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟡</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">U.S. dollar index hovers near 2-month highs ahead of Fed policy decision [0.14]</p>
+            <span class="tag tag-medium">Medium Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🔴</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Emerging market currencies under pressure amid rising U.S. yields [-0.37]</p>
+            <span class="tag tag-medium">Medium Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="margin-bottom: 8px; color: #d1d5db;">Low Impact</h4>
+        <div class="headline">
+          <span class="headline-sentiment">🟢</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Biotech sector outperforms on positive clinical trial results [0.31]</p>
+            <span class="tag tag-low">Low Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟢</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Infrastructure spending bill progress boosts industrial stocks [0.26]</p>
+            <span class="tag tag-low">Low Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟡</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Gold inches higher as inflation concerns linger [0.19]</p>
+            <span class="tag tag-low">Low Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🟡</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Muted reaction in bond markets following ECB policy meeting [0.05]</p>
+            <span class="tag tag-low">Low Impact</span>
+          </div>
+        </div>
+
+        <div class="headline">
+          <span class="headline-sentiment">🔴</span>
+          <div class="headline-content">
+            <p style="margin-bottom: 8px;">Profit taking weighs on previously high-flying meme stocks [-0.22]</p>
+            <span class="tag tag-low">Low Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Outlier Analysis</h3>
+        <p style="color: #9ca3af; margin-bottom: 16px;">
+          The sharp decline in risk appetite driven by geopolitical tensions [-0.59] stands out as a potential harbinger of shifting market dynamics. This bearish outlier warrants close monitoring for spillover effects into other asset classes.
+        </p>
+      </div>
+
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Cross-Asset Dynamics</h3>
+        <p style="color: #9ca3af; margin-bottom: 16px;">
+          Negative sentiment around emerging market currencies [-0.37] amid a rising U.S. dollar [0.14] highlights the ongoing divergence between developed and developing economies. Allocation shifts favoring the greenback could exacerbate downside risks for EM assets.
+        </p>
+
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Correlation Matrix</h4>
+            <table style="width: 100%; font-size: 12px;">
+              <tr>
+                <td></td>
+                <td>SPX</td>
+                <td>UST</td>
+                <td>USD</td>
+              </tr>
+              <tr>
+                <td>SPX</td>
+                <td>1.00</td>
+                <td class="negative">-0.65</td>
+                <td class="negative">-0.45</td>
+              </tr>
+              <tr>
+                <td>UST</td>
+                <td class="negative">-0.65</td>
+                <td>1.00</td>
+                <td class="positive">0.38</td>
+              </tr>
+              <tr>
+                <td>USD</td>
+                <td class="negative">-0.45</td>
+                <td class="positive">0.38</td>
+                <td>1.00</td>
+              </tr>
+            </table>
+          </div>
+          <div class="metric-card">
+            <h4>Flow Analysis</h4>
+            <p>Equity Flows: <span class="negative">-$12.4B</span></p>
+            <p>Bond Flows: <span class="positive">+$8.2B</span></p>
+            <p>Crypto Flows: <span class="neutral">+$1.1B</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Critical Alerts Section -->
+    <section class="section">
+      <h2 class="section-title">⚠️ CRITICAL ALERTS</h2>
+      
+      <div class="alert">
+        <h3>Supply Chain Disruptions</h3>
+        <p style="margin-bottom: 12px;">Taiwan semiconductor production down 18% QoQ due to geopolitical tensions, impacting 24% of WAM tech holdings</p>
+        <p style="margin-bottom: 12px;">Rare earth element export restrictions threaten to increase input costs by 12-16% for key industrial positions (CAMT, IIVI)</p>
+        <p style="margin-bottom: 12px;">Port congestion has delayed shipments by an average of 8 days, putting $120M in Q2 revenues at risk across 14 portfolio companies</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="positive">High (85%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Reduced sales/margins</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Satellite imagery</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Increase commodity hedges, diversify suppliers, re-assess Taiwan exposure
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+        <h3 style="color: #ef4444;">Competitive Landscape Threats</h3>
+        <p style="margin-bottom: 12px;">Rival fund Bridgewater accumulated a 6.2% stake in MSTR, potentially pressuring WAM's ability to influence corporate strategy</p>
+        <p style="margin-bottom: 12px;">CRWD's market share fell 240 bps to 14.8% as Microsoft and CrowdStrike launched competing products at 20% lower price points</p>
+        <p style="margin-bottom: 12px;">Indian IT services firms expanding aggressively into PRFT's core markets, undercutting billing rates by 35% on average</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="neutral">Medium (65%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Reduced pricing power</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>SEC filings, industry reports</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Engage activist strategies with MSTR, accelerate CRWD product development, re-evaluate PRFT growth assumptions
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.2);">
+        <h3 style="color: #eab308;">Litigation & Regulatory Issues</h3>
+        <p style="margin-bottom: 12px;">SEC investigating potential Reg FD violations at DPZ related to selective guidance disclosures; estimated penalties of $30-50M (12% of cash)</p>
+        <p style="margin-bottom: 12px;">EU antitrust authorities probing IBIT and Coincheck for anti-competitive practices in crypto custody; fines could reach 4% of global revenues</p>
+        <p style="margin-bottom: 12px;">Congressional hearings on REIT tax loopholes threaten EQC's advantaged structure; 30% probability of adverse policy change within 18 months</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="neutral">Medium (70%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Financial penalties</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Court dockets, lobbyist networks</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Quantify DPZ guidance revisions, model IBIT/Coincheck breakup scenarios, develop EQC restructuring contingencies
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+        <h3 style="color: #ef4444;">Financial Irregularities</h3>
+        <p style="margin-bottom: 12px;">Benford's Law analysis flags potential revenue overstatement at 3 portfolio companies; $82M in suspect transactions identified</p>
+        <p style="margin-bottom: 12px;">Short report alleges undisclosed related-party dealings at CAMT; if validated, could require 3-year restatement and 25% downward valuation revision</p>
+        <p style="margin-bottom: 12px;">Statistical outliers detected in MSTR's Bitcoin accounting; $200M (4% of BTC holdings) at risk of impairment if pricing model assumptions invalid</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="neutral">Medium (60%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Restatements, impairments</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Forensic accounting, blockchain analysis</p>
+          </div>
+        </div>
+       <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Initiate independent investigations, model full restatement scenarios, pressure for auditor rotations
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">
+        <h3 style="color: #22c55e;">Price Anomalies</h3>
+        <p style="margin-bottom: 12px;">IBIT trading at a 12% premium to NAV vs. historical average of 2%; 3.2 standard deviation overshoot vs. fair value estimate of $28.50</p>
+        <p style="margin-bottom: 12px;">EQC short interest has spiked to 18% of float vs. 6% for comparable REITs; borrow rates indicate a 45% probability of a &gt;20% correction</p>
+        <p style="margin-bottom: 12px;">Relative valuation of CRWD 30% above 5-year mean vs. peer group; options imply a 25% chance of reversion to historical norms within 6 months</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="positive">High (80%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Overvaluation risk, mean reversion</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Options pricing, short interest</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Tactically reduce IBIT exposure, monitor EQC recalls closely, initiate CRWD hedges and collars
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+        <h3 style="color: #ef4444;">Executive Changes</h3>
+        <p style="margin-bottom: 12px;">PRFT CEO retiring after a 15-year tenure marked by a 12.5% CAGR; incoming CEO lacks relevant sector experience, raising integration risks for 3 recent acquisitions</p>
+        <p style="margin-bottom: 12px;">MSTR CFO departed abruptly after only 18 months; forensic analysis of expense reports and disclosure gaps underway to assess for improprieties</p>
+        <p style="margin-bottom: 12px;">DPZ Chief Marketing Officer hired away by Restaurant Brands, jeopardizing the successful "Delivery Anywhere" campaign credited with 280 bps of market share gains</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="neutral">Medium (75%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Strategic missteps, financial controls</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Executive network mapping</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Assess PRFT M&A deal structures, expand MSTR audit procedures, model DPZ market share scenarios
+        </p>
+      </div>
+
+      <div class="alert" style="background-color: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">
+        <h3 style="color: #22c55e;">Insider Trading Patterns</h3>
+        <p style="margin-bottom: 12px;">Cluster analysis reveals abnormal selling by 5 IBIT executives ahead of SEC inquiry disclosure; average trade size 150% above 3-year baseline</p>
+        <p style="margin-bottom: 12px;">EQC insiders purchased $15M in shares in the past 30 days, the highest level since 2018; 80% probability of an upcoming strategic announcement</p>
+        <p style="margin-bottom: 12px;">CAMT directors awarded themselves outsized equity grants 2 weeks before a major contract win; grant-to-salary ratios 3x peer group norms</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Confidence</h4>
+            <p class="positive">High (85%)</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Implications</h4>
+            <p class="negative">Regulatory scrutiny, signaling effects</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Cross-Validation</h4>
+            <p>Form 4 filings, compensation benchmarking</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; font-size: 12px; margin-top: 12px;">
+          Recommendation: Monitor IBIT executive plane travel, model EQC accretion scenarios, red-flag CAMT grants to stakeholders
+        </p>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Key Takeaways</h3>
+        <ul style="color: #9ca3af; padding-left: 20px; margin-bottom: 16px;">
+          <li style="margin-bottom: 8px;">Aggregate $1.2B in value-at-risk from supply chain and competitive disruptions to tech and industrial holdings</li>
+          <li style="margin-bottom: 8px;">Regulatory actions could impair 15-25% of crypto-related AUM; develop proactive SEC/EU engagement strategy</li>
+          <li style="margin-bottom: 8px;">35% probability of a major financial restatement among top 15 positions; expand forensic diligence efforts</li>
+          <li style="margin-bottom: 8px;">Valuation re-rating scenarios indicate a net -$800M in potential markdowns; dynamically hedge overextended positions</li>
+          <li style="margin-bottom: 8px;">Executive flux introduces strategic uncertainty; board-level engagement and succession planning critical</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">
+          The confluence of cross-cutting risks requires tactical portfolio adjustments and enhanced monitoring. While WAM's liquidity profile and hedging program mitigate immediate risks, structural vulnerabilities demand strategic asset allocation shifts.
+        </p>
+      </div>
+    </section>
+
+    <!-- Trading Ideas Section -->
+    <section class="section">
+      <h2 class="section-title">💡 TRADING IDEAS</h2>
+      
+      <div style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #22c55e; margin-bottom: 12px;">BUY: Acme Robotics (ACME)</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Entry Range</h4>
+            <p>$52.10-$54.25</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Support: $51.80 | Resistance: $55.00</p>
+          </div>
+          <div class="metric-card">
+            <h4>Valuation</h4>
+            <p>18.2x NTM P/E</p>
+            <p>11.5x EV/EBITDA</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. sector avg: 24.6x P/E, 14.1x EV/EBITDA</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Return Projections</h4>
+            <p>3m: +12% (65% prob.)</p>
+            <p>6m: +25% (55% prob.)</p>
+            <p>12m: +45% (45% prob.)</p>
+          </div>
+          <div class="metric-card">
+            <h4>Options Structure</h4>
+            <p>Jan $55/$60 call spreads</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">3:1 asymmetric upside</p>
+            <p style="margin-top: 8px;">Risk-adjusted EV: <span class="positive">+18.4%</span></p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; margin-top: 12px;">
+          <strong>Catalyst:</strong> Major automation contract announcement expected Nov. 15th, potential +$0.25 EPS impact
+        </p>
+        <p style="color: #9ca3af; margin-top: 8px;">
+          <strong>Proprietary data:</strong> Web scraping shows +35% YoY growth in job postings for robotics engineers
+        </p>
+      </div>
+
+      <div style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #22c55e; margin-bottom: 12px;">BUY: Bionix Pharma (BNX)</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Entry Range</h4>
+            <p>$88.50-$92.00</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Support: $86.75 | Resistance: $94.50</p>
+          </div>
+          <div class="metric-card">
+            <h4>Valuation</h4>
+            <p>12.5% FCF yield</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. sector avg: 5.2%</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Return Projections</h4>
+            <p>3m: +8% (70% prob.)</p>
+            <p>6m: +18% (60% prob.)</p>
+            <p>12m: +30% (50% prob.)</p>
+          </div>
+          <div class="metric-card">
+            <h4>Options Structure</h4>
+            <p>Apr $90/$100 call spreads and $80 puts</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Positive skew</p>
+            <p style="margin-top: 8px;">Risk-adjusted EV: <span class="positive">+22.8%</span></p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; margin-top: 12px;">
+          <strong>Catalyst:</strong> Phase 3 trial data for lead oncology asset expected by year-end, $1B+ peak sales potential
+        </p>
+        <p style="color: #9ca3af; margin-top: 8px;">
+          <strong>Proprietary data:</strong> Satellite monitoring of clinical trial sites shows accelerating patient enrollment
+        </p>
+      </div>
+
+      <div style="background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">SELL: Legacy Enterprises (LEG)</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Breakdown Level</h4>
+            <p>$62.50 → $54.20</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">0.618 fib retracement of 2021 rally</p>
+          </div>
+          <div class="metric-card">
+            <h4>Fundamentals</h4>
+            <p>Margins compressing 120 bps YoY</p>
+            <p>DSO extending from 45 to 62 days</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Short Interest</h4>
+            <p>+22% MoM increase to 12.6% of float</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Borrow rates: 0.5% → 2.2%</p>
+          </div>
+          <div class="metric-card">
+            <h4>Consensus Estimates</h4>
+            <p>2023 EPS revised down from $4.20 to $3.65 (-13%)</p>
+            <p style="margin-top: 8px;">Downside risk: <span class="negative">-25%</span> (30% prob.)</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; margin-top: 12px;">
+          <strong>Sector rotation:</strong> Defensives outperforming cyclicals by 8% over last 60 days
+        </p>
+        <p style="color: #9ca3af; margin-top: 8px;">
+          <strong>Proprietary data:</strong> Web sentiment score falling from 72 to 48 on product quality concerns
+        </p>
+      </div>
+
+      <div style="background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">SELL: Dinosaur Media (DM)</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Breakdown Level</h4>
+            <p>Head-and-shoulders pattern targeting $17.25 (-18%)</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">On break of $21 neckline</p>
+          </div>
+          <div class="metric-card">
+            <h4>Fundamentals</h4>
+            <p>Revenue growth slowing from 12% to 4% YoY</p>
+            <p>Forward revenue -5% below consensus</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Short Interest</h4>
+            <p>8.6% of float (up from 5.2% 3mo ago)</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Utilization at 92%</p>
+          </div>
+          <div class="metric-card">
+            <h4>Valuation</h4>
+            <p>Forward EBITDA multiple contracting from 8.2x to 6.5x</p>
+            <p style="margin-top: 8px;">Downside risk: <span class="negative">-26%</span> at $15.50 support</p>
+          </div>
+        </div>
+        <p style="color: #9ca3af; margin-top: 12px;">
+          <strong>Sector rotation:</strong> Ad-exposed media underperforming S&P by 12% YTD
+        </p>
+        <p style="color: #9ca3af; margin-top: 8px;">
+          <strong>Proprietary data:</strong> App download data -18% QoQ, web traffic -12% MoM
+        </p>
+      </div>
+
+      <div style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color: #22c55e; margin-bottom: 12px;">PAIR TRADE: Long Apex Devices (APX) / Short Zetron Inc (ZET)</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Correlation</h4>
+            <p>2-year: 0.92 → Current: 0.58</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Broken down over last 90 days</p>
+          </div>
+          <div class="metric-card">
+            <h4>Spread Analysis</h4>
+            <p>Current ratio: 2.4 APX per ZET</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">+2.2 std dev from 5-year mean of 1.6</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Catalyst Asymmetry</h4>
+            <p>APX has major product launch in Q4</p>
+            <p>ZET facing market share losses</p>
+          </div>
+          <div class="metric-card">
+            <h4>Trade Structure</h4>
+            <p>Sizing: 1.8x APX vs ZET (beta-adjusted)</p>
+            <p style="margin-top: 8px;">Target return: <span class="positive">+12% to +18%</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Conviction Matrix</h3>
+        <table class="conviction-table">
+          <thead>
+            <tr>
+              <th>Idea</th>
+              <th>Timing</th>
+              <th>Asymmetry</th>
+              <th>Liquidity</th>
+              <th>Catalysts</th>
+              <th>Prop. Data</th>
+              <th>Conviction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ACME</td>
+              <td>5</td>
+              <td>4</td>
+              <td>4</td>
+              <td>4</td>
+              <td>5</td>
+              <td class="positive">4.4</td>
+            </tr>
+            <tr>
+              <td>BNX</td>
+              <td>4</td>
+              <td>5</td>
+              <td>3</td>
+              <td>5</td>
+              <td>4</td>
+              <td class="positive">4.2</td>
+            </tr>
+            <tr>
+              <td>LEG</td>
+              <td>4</td>
+              <td>3</td>
+              <td>5</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="neutral">3.8</td>
+            </tr>
+            <tr>
+              <td>DM</td>
+              <td>5</td>
+              <td>4</td>
+              <td>4</td>
+              <td>2</td>
+              <td>3</td>
+              <td class="neutral">3.6</td>
+            </tr>
+            <tr>
+              <td>Pair</td>
+              <td>3</td>
+              <td>5</td>
+              <td>3</td>
+              <td>4</td>
+              <td>3</td>
+              <td class="neutral">3.6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Deep Intelligence Section -->
+    <section class="section">
+      <h2 class="section-title">🔍 DEEP INTELLIGENCE</h2>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Proprietary Alternative Data Insights</h3>
+        <div class="grid-3">
+          <div class="metric-card">
+            <h4>Satellite Imagery</h4>
+            <p class="positive">Camtek facilities at 92.4% utilization</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. 3-year avg of 86.1%, indicating 7.3% revenue upside</p>
+          </div>
+          <div class="metric-card">
+            <h4>Web Sentiment</h4>
+            <p class="positive">Coincheck sentiment +0.62σ</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">From 12,491 sources, correlated with 24% increase in app downloads</p>
+          </div>
+          <div class="metric-card">
+            <h4>NLP Analysis</h4>
+            <p class="positive">CrowdStrike earnings call +1.4σ optimism</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. cybersecurity peers, predictive of 17.5% sales growth</p>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Credit Card Data</h4>
+            <p class="positive">MicroStrategy customer spend +28.2% YoY</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. guidance of 24-26%, indicating 2.6% EPS beat potential</p>
+          </div>
+          <div class="metric-card">
+            <h4>Patent Analysis</h4>
+            <p class="positive">63% of Camtek filings cite EUV lithography</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">27-month technology diffusion lag predicted</p>
+          </div>
+          <div class="metric-card">
+            <h4>Shipping Data</h4>
+            <p class="positive">+17.8% spike in Camtek Taiwan-to-US throughput</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Leading indicator for revenue in 2 quarters</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Cross-Asset Macro Regime Indicators</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Intermarket Analysis</h4>
+            <p class="negative">-3.1σ breakdown in stock-bond correlation</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">74.6% probability of stagflationary regime shift</p>
+          </div>
+          <div class="metric-card">
+            <h4>Liquidity Flow</h4>
+            <p class="negative">82nd percentile bearish anomaly</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">2.4σ decline in limit order book depth</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Options Positioning</h4>
+            <p class="negative">15.8% divergence in put-call gamma</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Associated with 31% increase in 30-day realized volatility</p>
+          </div>
+          <div class="metric-card">
+            <h4>Yield Curve</h4>
+            <p class="negative">1.2% inversion (99th percentile)</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">68% probability of Fed reversal within 6 months</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Quantitative Strategy Insights</h3>
+        <div class="grid">
+          <div class="metric-card">
+            <h4>Factor Analysis</h4>
+            <p class="positive">2.7σ momentum anomaly in semiconductors</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Camtek in 96th percentile of peer group</p>
+          </div>
+          <div class="metric-card">
+            <h4>Machine Learning</h4>
+            <p class="positive">4.1σ anomaly in Bitcoin microstructure</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">Potential for 38% 10-day return (Precision: 0.84)</p>
+          </div>
+        </div>
+        <div class="grid" style="margin-top: 16px;">
+          <div class="metric-card">
+            <h4>Regime Analysis</h4>
+            <p class="positive">Apple Multi-Strategy Sharpe: 2.4 in high vol regimes</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">vs. 1.1 benchmark (p&lt;0.001)</p>
+          </div>
+          <div class="metric-card">
+            <h4>Cointegration Testing</h4>
+            <p class="positive">2.6σ deviation in MSTR vs. Bitcoin</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 4px;">High-conviction pairs trade (t-stat: 6.2)</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Proprietary Intelligence Matrix</h3>
+        <p style="color: #9ca3af; margin-bottom: 16px;">
+          By combining the 1st principal components of our alternative data and the cross-asset macro indicators, the Proprietary Intelligence Matrix generates a quantitative score to inform tactical allocation:
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Alt Data Score</th>
+              <th>Macro Score</th>
+              <th>Composite</th>
+              <th>Insight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CAMT</td>
+              <td class="positive">+2.4σ</td>
+              <td class="positive">+1.6σ</td>
+              <td class="positive">+2.1σ</td>
+              <td>Overweight semi capex, EUV tailwinds</td>
+            </tr>
+            <tr>
+              <td>MSTR</td>
+              <td class="positive">+1.9σ</td>
+              <td class="negative">-0.8σ</td>
+              <td class="neutral">+0.7σ</td>
+              <td>Market-neutral, BTC proxy hedge</td>
+            </tr>
+            <tr>
+              <td>CRWD</td>
+              <td class="positive">+2.8σ</td>
+              <td class="neutral">+0.4σ</td>
+              <td class="positive">+1.9σ</td>
+              <td>Overweight, AI/ML cyber leadership</td>
+            </tr>
+            <tr>
+              <td>IBIT</td>
+              <td class="neutral">+0.5σ</td>
+              <td class="negative">-1.2σ</td>
+              <td class="negative">-0.2σ</td>
+              <td>Underweight, regulatory overhang</td>
+            </tr>
+            <tr>
+              <td>CNCKF</td>
+              <td class="positive">+2.2σ</td>
+              <td class="positive">+1.1σ</td>
+              <td class="positive">+1.8σ</td>
+              <td>Overweight, Web3 ecosystem growth</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="color: #9ca3af; margin-top: 16px;">
+          The matrix indicates maximum bullish conviction on CrowdStrike (+1.9σ) given its sector-leading AI/ML capabilities and positive earnings sentiment. Camtek scores an Overweight (+2.1σ) based on robust facility utilization and EUV exposure. Caution is warranted on the iShares Bitcoin Trust (-0.2σ) as macro headwinds overshadow modest blockchain momentum.
+        </p>
+        <p style="color: #9ca3af; margin-top: 16px; font-style: italic;">
+          This intelligence synthesis leverages proprietary data science to deliver a quantitative edge and navigate rapidly-shifting market regimes. While the models show predictive power, discretion is advised in sizing positions as latent risk factors may not be captured. Ongoing research into reinforcement learning aims to adaptively calibrate the matrix based on forward-looking asset class volatility.
+        </p>
+         <p style="color: #6b7280; font-size: 18px; margin-top: 16px;">
+           We keep an eye on markets, so you don't have to: and we create market research worth worth paying for. Know first. Click <a href="">here</a> for tomorrow's insights. Built by a team of passionate analysts leveraging the latest algorithms for market research – and curating it for your portfolio, every single morning at 8 AM. <br><br>
+        Sincerely,<br><br>
+        George @ wire84 Quantitative Research
+      </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid #374151;">
+      <p style="color: #6b7280; font-size: 14px; margin-bottom: 12px;">
+        This report leverages wire84's proprietary intelligence network, alternative data extraction, and quantitative modeling. For customized overlay strategies or access to our raw datasets, contact your wire84 representative.
+      </p>
+      <p style="color: #6b7280; font-size: 12px;">
+        <strong>RESTRICTED:</strong> Authorized for Clarity Capital Management institutional clients only. Not for redistribution. wire84 is not financial advice. 
+      </p>
+     
+    </footer>
+  </div>
+</body>
+</html>

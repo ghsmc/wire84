@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>wire84 - Market Intelligence Report</title>
+  <style>
+    body {
+      font-family: 'Source Code Pro', monospace;
+      background-color: #000000;
+      color: #f3f4f6;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #374151;
+    }
+
+    .section {
+      background-color: rgba(17, 24, 39, 0.3);
+      border: 1px solid #374151;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      color: #ef4444;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .headline {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .headline:last-child {
+      border-bottom: none;
+    }
+
+    .sentiment {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .metric-card {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid #1f2937;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .alert {
+      background-color: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .trade-idea {
+      background-color: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .matrix-cell {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid #1f2937;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+
+    .tag-high {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .tag-medium {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .tag-low {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>wire84 Market Intelligence Report</h1>
+      <p>March 15, 2025 • 08:00 AM EST</p>
+    </header>
+
+    <!-- Market Headlines & Sentiment -->
+    <section class="section">
+      <h2 class="section-title">📊 MARKET HEADLINES & SENTIMENT ANALYSIS</h2>
+      
+      <div class="headline">
+        <span class="sentiment">🔴</span>
+        <div>
+          <div>TSMC reports 40% drop in 3nm chip yields, impacting AI GPU production</div>
+          <span class="tag tag-high">High Impact</span>
+          <span class="tag tag-medium">Tech Sector</span>
+        </div>
+      </div>
+
+      <div class="headline">
+        <span class="sentiment">🟢</span>
+        <div>
+          <div>FDA fast-tracks novel quantum biosensor for cancer detection</div>
+          <span class="tag tag-high">Breakthrough</span>
+          <span class="tag tag-medium">Healthcare</span>
+        </div>
+      </div>
+
+      <div class="headline">
+        <span class="sentiment">🟡</span>
+        <div>
+          <div>ECB signals potential rate cut timeline shift amid inflation data</div>
+          <span class="tag tag-medium">Macro</span>
+          <span class="tag tag-low">Expected</span>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <h4>Overall Sentiment Score</h4>
+          <div style="font-size: 2rem; color: #f59e0b;">6.8/10</div>
+          <p>Neutral with positive bias</p>
+        </div>
+        <div class="metric-card">
+          <h4>Sentiment Distribution</h4>
+          <div>🟢 35% Positive</div>
+          <div>🟡 45% Neutral</div>
+          <div>🔴 20% Negative</div>
+        </div>
+        <div class="metric-card">
+          <h4>Cross-Asset Correlation</h4>
+          <div>SPX/VIX: -0.85</div>
+          <div>BTC/GOLD: 0.12</div>
+          <div>USD/EUR: -0.32</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Critical Alerts -->
+    <section class="section">
+      <h2 class="section-title">⚠️ CRITICAL ALERTS</h2>
+      
+      <div class="alert">
+        <h3>Supply Chain Alert: Semiconductor</h3>
+        <p>Critical shortage of neon gas affecting chip manufacturing. 3 major suppliers report 60% capacity reduction.</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <strong>Impact Score:</strong> 8.5/10
+          </div>
+          <div class="matrix-cell">
+            <strong>Time Horizon:</strong> 3-6 months
+          </div>
+        </div>
+      </div>
+
+      <div class="alert">
+        <h3>Regulatory Risk: Fintech</h3>
+        <p>SEC signals enhanced scrutiny of AI-driven trading platforms. New guidelines expected within 30 days.</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <strong>Impact Score:</strong> 7.2/10
+          </div>
+          <div class="matrix-cell">
+            <strong>Affected Sectors:</strong> Fintech, AI, Trading
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buy/Sell Ideas -->
+    <section class="section">
+      <h2 class="section-title">💡 BUY/SELL IDEAS</h2>
+
+      <div class="trade-idea">
+        <h3>High-Conviction Buy: QuantumTech (QTX)</h3>
+        <p>Patent analysis reveals 89% probability of quantum advantage achievement in Q3.</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <strong>Entry:</strong> $142-145
+          </div>
+          <div class="matrix-cell">
+            <strong>Target:</strong> $188
+          </div>
+          <div class="matrix-cell">
+            <strong>Stop:</strong> $128
+          </div>
+        </div>
+      </div>
+
+      <div class="trade-idea">
+        <h3>Pair Trade Opportunity</h3>
+        <p>Long ASML / Short Intel - Semiconductor equipment vs. manufacturer divergence</p>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <strong>Ratio:</strong> 1.2
+          </div>
+          <div class="matrix-cell">
+            <strong>Correlation:</strong> -0.85
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Intelligence -->
+    <section class="section">
+      <h2 class="section-title">🔍 DEEP INTELLIGENCE</h2>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <h4>Satellite Analysis</h4>
+          <p>Container traffic at Shanghai port +22% MoM</p>
+          <span class="tag tag-high">Strong Signal</span>
+        </div>
+
+        <div class="metric-card">
+          <h4>Patent Filings</h4>
+          <p>312 new quantum computing patents in Feb</p>
+          <span class="tag tag-medium">Growing Trend</span>
+        </div>
+
+        <div class="metric-card">
+          <h4>Alternative Data</h4>
+          <p>Job postings in AI sector +45% YoY</p>
+          <span class="tag tag-high">Significant</span>
+        </div>
+
+        <div class="metric-card">
+          <h4>Web Scraping Insights</h4>
+          <p>Social sentiment on EVs turns positive</p>
+          <span class="tag tag-medium">Shifting Trend</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <h3>Proprietary Intelligence Matrix</h3>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Macro Regime</h4>
+            <p>Late Cycle / High Volatility</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Factor Rotation</h4>
+            <p>Value → Quality</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Risk Appetite</h4>
+            <p>Moderately Risk-On</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

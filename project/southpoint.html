@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wire84 - SOUTHPOINT CAPITAL ADVISORS LP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Source Code Pro', monospace;
+      background-color: #000000;
+      color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #374151;
+    }
+
+    .section {
+      background-color: rgba(17, 24, 39, 0.3);
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      color: #ef4444;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sentiment-bar {
+      height: 24px;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+
+    .sentiment-positive {
+      background: linear-gradient(90deg, rgba(34, 197, 94, 0.2) 46.7%, transparent 46.7%);
+    }
+
+    .sentiment-neutral {
+      background: linear-gradient(90deg, rgba(234, 179, 8, 0.2) 33.3%, transparent 33.3%);
+    }
+
+    .sentiment-negative {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 20%, transparent 20%);
+    }
+
+    .alert {
+      background-color: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .matrix-cell {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .headline {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+
+    .positive { color: #22c55e; }
+    .neutral { color: #eab308; }
+    .negative { color: #ef4444; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #374151;
+    }
+
+    .data-table th {
+      color: #9ca3af;
+      font-weight: 600;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
+      
+      .matrix {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <svg viewBox="0 0 110 60" style="width: 60px; height: 60px; margin: 0 auto 20px;">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <path d="M5.73 36.91C9.55 41.07 14.91 45.87 20.85 49.65 32.78 57.24 46.87 59.43 55.26 59.43 63.57 59.43 77.39 57.17 89.12 49.65 95.1 45.81 100.37 41.2 104.19 37.04 107.68 33.25 110 29.72 110 29.72 110 29.72 108.01 26.49 104.19 22.42 100.52 18.49 95.14 13.8 89.12 10.01 77.81 2.9 63.13 0 55.26 0 46.88 0 32.78 2.42 20.85 10.01 14.93 13.78 9.55 18.42 5.73 22.52 2.19 26.32 0 29.72 0 29.72 0 29.72 2.22 33.08 5.73 36.91Z" fill="#FFFFFF" transform="translate(55.000000, 29.715640) scale(-1, 1) translate(-55.000000, -29.715640)"/>
+          <path d="M55.26 59.43C71.67 59.43 84.98 46.13 84.98 29.72 84.98 13.3 71.67 0 55.26 0 38.85 0 25.55 13.3 25.55 29.72 25.55 46.13 38.85 59.43 55.26 59.43Z" fill="#FFEE00"/>
+          <circle fill="#ffa500" cx="55.26" cy="29.72" r="22.42"/>
+          <path d="M55.26 44.31C63.32 44.31 69.86 37.78 69.86 29.72 69.86 21.65 63.32 15.12 55.26 15.12 47.2 15.12 40.66 21.65 40.66 29.72 40.66 37.78 47.2 44.31 55.26 44.31Z" fill="#FF0000"/>
+          <circle fill="#FFFFFF" opacity="0.2" cx="55.26" cy="29.72" r="12"/>
+          <circle fill="#ffffff" opacity="0.3" cx="50" cy="25" r="3"/>
+        </g>
+      </svg>
+      <h1>wire84 - MORNING ALPHA REPORT</h1>
+      <p>Tuesday, March 11, 2025 | RESTRICTED DISTRIBUTION - SOUTHPOINT CAPITAL ADVISORS LP</p>
+    </header>
+
+    <!-- Introduction -->
+    <section class="section">
+      <p style="color: #9ca3af; margin-bottom: 16px;">Hi William,</p>
+      <p style="color: #9ca3af; margin-bottom: 16px;"><em>wire84</em> Market Intelligence Briefing - Tuesday, March 11, 2025</p>
+      <p style="color: #9ca3af; margin-bottom: 16px;">
+        As we commence trading this Tuesday, March 11, 2025, global financial markets find themselves grappling with a potent amalgamation of geopolitical tensions, shifting monetary policy expectations, and nascent signals of a potential economic inflection point. Today's wire84 report delves into the nuanced interplay between the Fed's evolving reaction function, the recent gyrations in key commodity markets, and the implications of the latest portfolio flow dynamics across systematic and discretionary investors. We aim to contextualize these cross-asset undercurrents within a rigorous quantitative framework, offering our discerning clientele at Southpoint Capital Advisors LP a differentiated perspective to navigate these turbulent market conditions.
+      </p>
+    </section>
+
+    <!-- Market Sentiment -->
+    <section class="section">
+      <h2 class="section-title">📊 MARKET HEADLINES & SENTIMENT ANALYSIS</h2>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Market Sentiment Summary</h3>
+        <p><strong>Overall Sentiment Score:</strong> 0.12 (Slightly Positive)</p>
+        
+        <div style="margin-top: 16px;">
+          <p><strong>Sentiment Distribution:</strong></p>
+          <div>
+            <p>🟢 Positive: 7 headlines (46.67%)</p>
+            <div class="sentiment-bar sentiment-positive"></div>
+            <p>🟡 Neutral: 5 headlines (33.33%)</p>
+            <div class="sentiment-bar sentiment-neutral"></div>
+            <p>🔴 Negative: 3 headlines (20.00%)</p>
+            <div class="sentiment-bar sentiment-negative"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Headlines by Sentiment</h3>
+        
+        <h4 style="color: #d1d5db; margin-bottom: 8px;">High Impact</h4>
+        <div class="headline">
+          <p>🟢 S&P 500 Gains 1.2% on Strong Earnings, Improved Economic Outlook (Sentiment: 0.75)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 10-Year Treasury Yield Falls to 1.45% as Inflation Concerns Ease (Sentiment: 0.62)</p>
+        </div>
+        <div class="headline">
+          <p>🔴 U.S. Weekly Jobless Claims Unexpectedly Rise to 412K (Sentiment: -0.58)</p>
+        </div>
+
+        <h4 style="color: #d1d5db; margin: 16px 0 8px;">Medium Impact</h4>
+        <div class="headline">
+          <p>🟡 Fed Minutes Signal Possible Tapering Discussion in Upcoming Meetings (Sentiment: 0.15)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 Eurozone Manufacturing PMI Hits Record High of 63.4 in June (Sentiment: 0.80)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 WTI Crude Oil Rises 2.3% on Bullish Demand Outlook (Sentiment: 0.70)</p>
+        </div>
+        <div class="headline">
+          <p>🟡 U.S. Pending Home Sales Decline 4.4% in April (Sentiment: -0.25)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 Chinese Industrial Profits Surge 57% YoY in April (Sentiment: 0.85)</p>
+        </div>
+
+        <h4 style="color: #d1d5db; margin: 16px 0 8px;">Low Impact</h4>
+        <div class="headline">
+          <p>🟡 Bitcoin Hovers Near $40,000 as Regulatory Uncertainty Persists (Sentiment: 0.05)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 U.S. Consumer Confidence Rises Slightly to 117.2 in May (Sentiment: 0.40)</p>
+        </div>
+        <div class="headline">
+          <p>🟡 Japan's Nikkei 225 Index Closes Flat Amid Mixed Economic Data (Sentiment: 0.00)</p>
+        </div>
+        <div class="headline">
+          <p>🔴 German Retail Sales Unexpectedly Fall 5.5% MoM in April (Sentiment: -0.72)</p>
+        </div>
+        <div class="headline">
+          <p>🟡 Gold Prices Edge Higher as Dollar Weakens (Sentiment: 0.20)</p>
+        </div>
+        <div class="headline">
+          <p>🔴 UK GDP Growth Slows to 2.3% in April (Sentiment: -0.45)</p>
+        </div>
+        <div class="headline">
+          <p>🟢 Global M&A Activity Reaches $2.4 Trillion YTD, Up 158% YoY (Sentiment: 0.90)</p>
+        </div>
+      </div>
+
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Outlier Analysis</h3>
+        <p style="color: #9ca3af;">
+          The unexpected rise in U.S. weekly jobless claims (Headline 3, Sentiment: -0.58) stands out as a potential early warning sign of labor market weakness, diverging from the generally positive economic sentiment. Close monitoring of this trend is advised.
+        </p>
+      </div>
+
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Cross-Asset Correlations</h3>
+        <p style="color: #9ca3af;">
+          The decline in 10-year Treasury yields (Headline 2, Sentiment: 0.62) alongside gains in the S&P 500 (Headline 1, Sentiment: 0.75) suggests a risk-on market environment, with investors rotating from bonds to equities. The rise in WTI Crude Oil prices (Headline 6, Sentiment: 0.70) further supports this view, indicating expectations of robust economic growth.
+        </p>
+      </div>
+
+      <div style="margin: 24px 0;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Sentiment Dispersion Index</h3>
+        <p style="color: #9ca3af;">
+          The Sentiment Dispersion Index, calculated as the standard deviation of headline sentiment scores, stands at 0.58. This elevated level suggests significant uncertainty and divergence in market views, warranting a cautious approach to portfolio positioning and risk management.
+        </p>
+      </div>
+    </section>
+
+    <!-- Critical Alerts -->
+    <section class="section">
+      <h2 class="section-title">⚠️ CRITICAL ALERTS</h2>
+      
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Supply Chain Disruptions</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Rare earth element supply shortages impacting electronics manufacturers. Estimated revenue impact of 5-8% for Q3. High confidence (85% probability).</li>
+          <li>Port congestion at Long Beach causing 3-5 week delays for consumer goods importers. Potential 150-250 bps gross margin compression. Medium confidence (70% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Underweight impacted names, initiate hedges on exposed positions.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Competitive Landscape Threats</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Insurgent competitor taking 12% market share in cloud security software vertical. $250M annual revenue at risk for incumbent portfolio holding. High confidence (90% probability).</li>
+          <li>Price war in commercial aviation MRO space compressing EBIT margins by 300-500 bps. Market share shifts of 5-10% likely. Medium confidence (75% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Exit or reduce positions in threatened companies, monitor for activist involvement.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Litigation & Regulatory Issues</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>DOJ antitrust probe of semiconductor capital equipment makers, potential fines of $500M-$1B. Low confidence (60% probability), high severity.</li>
+          <li>SEC investigating revenue recognition practices at enterprise SaaS firm. Restatement risk of 10-20% of TTM sales. Medium confidence (80% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Avoid or short exposed names, monitor docket filings and SEC disclosures.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Financial Irregularities</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Forensic analysis reveals potential $100M channel stuffing scheme at auto parts supplier. High confidence (95% probability). Implies 30% downside to equity.</li>
+          <li>Abnormal levels of factoring and A/R securitization at consumer finance company. Raises solvency risks. Medium confidence (70% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: In-depth due diligence on suspicious names, initiate short positions as warranted.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Price Anomalies</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Unusual options activity and short interest in biotech stock ahead of clinical trial data. 25% probability of insider trading. Close monitoring required.</li>
+          <li>Freight forwarding company trading at 12x EV/EBITDA vs 8x historical average. 2 standard deviation expensive. Medium confidence mispricing.</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Conduct statistical arbitrage around significant anomalies. Avoid crowded trades.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Executive Changes</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Unexpected resignation of respected CFO at industrial distributor. Preceded previous accounting scandal. High confidence (80% probability) of issues.</li>
+          <li>Divisional president of medical devices company departed for competitor. Suggests market share losses and ROIC declines. Medium confidence (75% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Quickly assess management quality implications. Downgrade as appropriate.</p>
+      </div>
+
+      <div class="alert">
+        <h3 style="color: #ef4444; margin-bottom: 12px;">Insider Trading Patterns</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Cluster of insider sales by C-suite at regional bank 1.5 standard deviations above normal levels. Raises asset quality questions. Medium confidence (70% probability).</li>
+          <li>Abnormal exercising of deep in-the-money options by executives at defense contractor. Possible early warning of budget cuts. Low confidence (60% probability).</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">Tactical response: Analyze Form 4 filings in detail. Adjust position sizing based on insider trading signals.</p>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 12px;">Risk Exposure Matrix - Top Portfolio Vulnerabilities</h3>
+        <ul style="color: #9ca3af; margin-bottom: 16px;">
+          <li>Semiconductor capital equipment holdings (30% of long book) - DOJ/antitrust probe</li>
+          <li>Enterprise software positions (25% of long book) - Accounting irregularities, competitive threats</li>
+          <li>Industrial and auto supply chain (20% of long book) - Disruptions, management turnover</li>
+        </ul>
+        <p style="color: #9ca3af; font-style: italic;">
+          Tactical response: Stress test portfolios against correlated risk factors. Implement sector-specific hedging overlay. Dynamically adjust gross and net exposures as appropriate.
+        </p>
+      </div>
+    </section>
+
+    <!-- Deep Intelligence -->
+    <section class="section">
+      <h2 class="section-title">🔍 DEEP INTELLIGENCE</h2>
+      
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Proprietary Alternative Data Insights</h3>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Satellite Imagery</h4>
+            <p class="positive">18.4% QoQ decline in truck volumes</p>
+            <p style="color: #9ca3af; font-size: 12px;">Confidence: 90%</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>NLP Analysis</h4>
+            <p class="negative">-1.4σ Financial sector sentiment</p>
+            <p style="color: #9ca3af; font-size: 12px;">Confidence: 95%</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Credit Card Data</h4>
+            <p class="negative">+18.2% MoM delinquencies</p>
+            <p style="color: #9ca3af; font-size: 12px;">p < 0.01</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Cross-Asset Macro Regime Indicators</h3>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Correlation Analysis</h4>
+            <p class="negative">-0.62 Growth/Value correlation</p>
+            <p style="color: #9ca3af; font-size: 12px;">11th percentile since 2005</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Liquidity Analysis</h4>
+            <p class="negative">-$8.4B dealer gamma exposure</p>
+            <p style="color: #9ca3af; font-size: 12px;">9th percentile</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Rate Expectations</h4>
+            <p class="neutral">164bps of cuts priced by Dec-25</p>
+            <p style="color: #9ca3af; font-size: 12px;">vs. 122bps in Feb</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Quantitative Strategy Insights</h3>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>Quality Factor</h4>
+            <p class="positive">+6.8% YTD alpha</p>
+            <p style="color: #9ca3af; font-size: 12px;">Sharpe: 1.41</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Microstructure</h4>
+            <p class="negative">38% HFT participation in ADBE</p>
+            <p style="color: #9ca3af; font-size: 12px;">99th percentile</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>Vol Surface</h4>
+            <p class="positive">16% risk premium in 3M puts</p>
+            <p style="color: #9ca3af; font-size: 12px;">93rd percentile</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <h3 style="color: #f3f4f6; margin-bottom: 16px;">Proprietary Intelligence Matrix</h3>
+        <p style="color: #9ca3af; margin-bottom: 16px;">
+          The Southpoint Proprietary Intelligence Matrix integrates 148 alternative datasets on a security-level basis. Composite score ranges from -5.0 to +5.0, with positive (negative) values indicating bullish (bearish) outlook.
+        </p>
+        
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Security</th>
+              <th>Score</th>
+              <th>Key Drivers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HUM</td>
+              <td class="positive">+4.2</td>
+              <td>Positive enrollment and sentiment data outweighs regulatory concerns</td>
+            </tr>
+            <tr>
+              <td>TSM</td>
+              <td class="positive">+3.8</td>
+              <td>Technological lead and robust demand support valuation premium</td>
+            </tr>
+            <tr>
+              <td>AAPL</td>
+              <td class="positive">+3.5</td>
+              <td>Quality metrics resilient across datasets; buyback support intact</td>
+            </tr>
+            <tr>
+              <td>HOOD</td>
+              <td class="negative">-4.6</td>
+              <td>Rapid deterioration in credit performance and user engagement</td>
+            </tr>
+            <tr>
+              <td>ADBE</td>
+              <td class="negative">-3.7</td>
+              <td>Algorithmic signals indicate distribution; fundamental momentum waning</td>
+            </tr>
+            <tr>
+              <td>COIN</td>
+              <td class="negative">-3.4</td>
+              <td>On-chain metrics show accelerating institutional outflows; SEC overhang</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid #374151;">
+      <p style="color: #6b7280; font-size: 14px; margin-bottom: 12px;">
+        This report leverages wire84's proprietary intelligence network, alternative data extraction, and quantitative modeling. For customized overlay strategies or access to our raw datasets, contact your wire84 representative.
+      </p>
+      <p style="color: #6b7280; font-size: 12px;">
+        <strong>RESTRICTED:</strong> Authorized for Southpoint Capital Advisors LP institutional clients only. Not for redistribution.
+      </p>
+      <p style="color: #6b7280; font-size: 12px; margin-top: 24px;">
+        Sincerely,<br>
+        George @ wire84 Quantitative Research
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
