@@ -73,6 +73,41 @@ export const defenseAnalytics = {
     return (totalRiskScore / risks.length) * 100;
   },
 
+  // Get growth opportunities
+  getGrowthOpportunities: () => {
+    return defenseIndustryData.outlook.winners.filter(w => w.growth === 'Strong');
+  },
+
+  // Calculate budget allocation percentages
+  getBudgetAllocation: () => {
+    const total = defenseIndustryData.budget.total;
+    const breakdown = defenseIndustryData.budget.breakdown;
+    
+    return Object.entries(breakdown).map(([category, value]) => ({
+      category,
+      value,
+      percentage: (value / total) * 100
+    }));
+  },
+
+  // Get regulatory impact analysis
+  getRegulatoryImpact: () => {
+    return defenseIndustryData.trends.regulatory.reduce((acc, reg) => {
+      acc[reg.impact] = (acc[reg.impact] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+  },
+
+  // Calculate contractor diversity score (0-100)
+  calculateContractorDiversity: (contractorName: string) => {
+    const contractor = defenseIndustryData.topContractors.find(
+      c => c.name === contractorName
+    );
+    if (!contractor) return 0;
+    
+    return (contractor.specialties.length / 5) * 100; // Normalized to max of 5 specialties
+  },
+
   // Get supply chain risk assessment
   getSupplyChainRisk: () => {
     const highImpactIssues = defenseIndustryData.trends.supplyChain.filter(

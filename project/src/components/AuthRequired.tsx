@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
 import { Loader2 } from 'lucide-react';
 
 interface AuthRequiredProps {
@@ -9,20 +8,18 @@ interface AuthRequiredProps {
 
 const AuthRequired: React.FC<AuthRequiredProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
+    // Simulate auth check
+    const checkAuth = () => {
+      // For demo, consider user always authenticated
+      setIsAuthenticated(true);
       setLoading(false);
-    });
+    };
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
+    checkAuth();
   }, []);
 
   if (loading) {
@@ -33,7 +30,7 @@ const AuthRequired: React.FC<AuthRequiredProps> = ({ children }) => {
     );
   }
 
-  if (!user) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

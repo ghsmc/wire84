@@ -40,6 +40,36 @@ export const defenseIndustryData = {
       revenue: 32.7,
       specialties: ["F-15EX fighter jet", "satellite systems"],
       recentContracts: 8.9
+    },
+    {
+      name: "L3Harris Technologies",
+      revenue: 15.6,
+      specialties: ["communication systems", "tactical radios", "jamming technology"],
+      recentContracts: 5.2
+    },
+    {
+      name: "HII",
+      revenue: 11.4,
+      specialties: ["shipbuilding", "defense technologies"],
+      recentContracts: 4.8
+    },
+    {
+      name: "Leidos",
+      revenue: 11.1,
+      specialties: ["IT services", "mission-critical systems"],
+      recentContracts: 3.9
+    },
+    {
+      name: "Booz Allen Hamilton",
+      revenue: 6.8,
+      specialties: ["AI", "cybersecurity", "consulting"],
+      recentContracts: 2.7
+    },
+    {
+      name: "Amentum",
+      revenue: 5.7,
+      specialties: ["engineering", "technical services"],
+      recentContracts: 1.9
     }
   ],
 
@@ -83,6 +113,12 @@ export const defenseIndustryData = {
       value: 229,
       type: "Aircraft Systems",
       description: "Life cycle research for cargo helicopter systems"
+    },
+    {
+      contractor: "BAE Systems",
+      value: 356.7,
+      type: "Combat Vehicles",
+      description: "Army contract modification for armored vehicles"
     }
   ],
 
@@ -152,6 +188,29 @@ export const defenseIndustryData = {
   },
 
   outlook: {
+    winners: [
+      {
+        company: "Northrop Grumman",
+        strengths: ["aerospace innovation", "nuclear modernization", "space systems"],
+        growth: "Strong"
+      },
+      {
+        company: "Lockheed Martin",
+        strengths: ["F-35 program", "market leadership", "international exposure"],
+        growth: "Strong"
+      },
+      {
+        company: "General Dynamics",
+        strengths: ["diversified portfolio", "government revenue", "submarine programs"],
+        growth: "Moderate"
+      },
+      {
+        company: "SAIC",
+        strengths: ["specialized technology", "consulting services", "NASA contracts"],
+        growth: "Moderate"
+      }
+    ],
+    
     risks: [
       {
         factor: "Budget Uncertainty",

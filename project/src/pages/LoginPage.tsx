@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import EyeLogo from '../components/EyeLogo';
 
 function LoginPage() {
@@ -20,15 +19,15 @@ function LoginPage() {
     setError('');
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (error) throw error;
-      navigate(from, { replace: true });
+      // For demo purposes, accept any login
+      if (email === 'demo@wire84.com' && password === 'demo') {
+        navigate(from, { replace: true });
+      } else {
+        throw new Error('Invalid credentials. Use demo@wire84.com / demo');
+      }
     } catch (err: any) {
-      setError(err.message);
+      console.error('Login error:', err);
+      setError(err.message || 'Failed to sign in. Please check your credentials and try again.');
     } finally {
       setLoading(false);
     }
@@ -102,6 +101,12 @@ function LoginPage() {
             Sign up
           </Link>
         </p>
+
+        <div className="mt-8 text-center text-sm text-gray-500">
+          <p>Demo credentials:</p>
+          <p>Email: demo@wire84.com</p>
+          <p>Password: demo</p>
+        </div>
       </div>
     </div>
   );

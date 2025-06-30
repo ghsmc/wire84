@@ -12,7 +12,6 @@
     "server": "node server.js"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.7",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",

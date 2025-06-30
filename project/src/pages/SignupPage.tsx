@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import EyeLogo from '../components/EyeLogo';
 
 function SignupPage() {
@@ -17,15 +16,11 @@ function SignupPage() {
     setError('');
 
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) throw error;
+      // For demo purposes, simulate signup success
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
       navigate('/terminal');
     } catch (err: any) {
-      setError(err.message);
+      setError('Failed to create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -99,6 +94,12 @@ function SignupPage() {
             Login
           </Link>
         </p>
+
+        <div className="mt-8 text-center text-sm text-gray-500">
+          <p>For demo access, use:</p>
+          <p>Email: demo@wire84.com</p>
+          <p>Password: demo</p>
+        </div>
       </div>
     </div>
   );

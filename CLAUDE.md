@@ -4,92 +4,144 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-wire84 is a financial market intelligence reporting platform that generates sophisticated HTML reports for institutional clients. The project consists of static HTML templates with embedded CSS that create dark-themed, professional financial reports featuring market sentiment analysis, trading ideas, and proprietary intelligence.
+wire84 is a comprehensive financial market intelligence platform that combines static HTML report templates with a full-stack React application. The platform serves two primary functions:
+1. **Static HTML Reports**: Professional financial reports with embedded CSS for standalone distribution
+2. **React Web Application**: Interactive platform with user authentication, real-time data, and multiple analytical dashboards
 
 ## Architecture
 
-This is a static HTML website project with the following structure:
+### Dual Structure
+The project has a unique dual structure:
+- **Root level**: Legacy static HTML templates and bundled assets
+- **`project/` directory**: Modern React application with full-stack capabilities
 
-- **Root HTML files**: Main report templates served directly
-  - `index.html` - Main application entry point (likely React-based, references bundled assets)
-  - `market-report.html` - Standalone market intelligence report template
-  - `southpoint.html` - Client-specific report for Southpoint Capital Advisors LP
-  - `email-template.html` - Email-formatted report template
+### React Application (`project/`)
+- **Frontend**: React 18 + TypeScript + Vite build system
+- **Styling**: Tailwind CSS with custom dark theme
+- **Backend Integration**: Supabase for authentication and database
+- **Data Sources**: Multiple APIs for market data, defense contracts, and financial intelligence
+- **Routing**: React Router with protected routes
 
-- **Source directory (`src/`)**: Development templates
-  - `email-template.html` - Source template for email reports
-  - `market-report.html` - Source template for market reports
-
-- **Assets directory (`assets/`)**: Bundled production assets
-  - `main-dkjgwl51.js` - Main JavaScript bundle (806KB)
-  - `main-btwvbh90.css` - Main CSS bundle (32KB)
-
-- **Static assets**:
-  - `favicon.svg` - Site favicon
-  - `wire84.png` - Logo/branding image
-
-## Development Workflow
-
-### File Organization
-- The project appears to have both source templates (`src/`) and production-ready HTML files in the root
-- The main `index.html` references bundled assets, suggesting a build process exists
-- Other HTML files are standalone templates with embedded CSS for email/report distribution
-
-### Styling Architecture
-- Uses a consistent dark theme with Source Code Pro monospace font
-- Color scheme: Black background (#000000) with gray borders and red accent colors (#ef4444)
-- Grid-based layouts with responsive design for different screen sizes
-- CSS is embedded directly in HTML files for standalone distribution
-
-### Content Structure
-All reports follow a consistent structure:
-1. **Header** - Brand logo, title, date, and distribution info
-2. **Market Sentiment** - Sentiment analysis, headlines categorized by impact
-3. **Critical Alerts** - Risk assessments with confidence levels and recommendations
-4. **Trading Ideas** - Buy/sell recommendations with entry/exit points and conviction matrices
-5. **Deep Intelligence** - Proprietary data insights from satellite imagery, web scraping, etc.
-
-### Report Types
-1. **General Market Reports** - Broad market intelligence
-2. **Client-Specific Reports** - Customized for specific capital management firms
-3. **Email Templates** - Formatted for email distribution with enhanced styling
+### Key Components
+- **Authentication**: Supabase-based auth with protected routes
+- **Dashboards**: Multiple specialized dashboards (hedge funds, stocks, insider trades, defense)
+- **Reports**: Dynamic report generation with HTML templates
+- **API Integration**: Express.js backend with MongoDB and web scraping capabilities
 
 ## Development Commands
 
-Since this appears to be a static site with a build process:
-
+### Frontend Development
 ```bash
-# No package.json found, but based on bundled assets:
-# Build process likely exists (framework unclear)
-# Assets suggest Vite or similar bundler was used
-
-# For development:
-# - Edit source files in src/ directory
-# - Build process generates root HTML files and assets/
-# - Static files can be served directly from root
-
-# To serve locally (example):
-python -m http.server 8000
-# or
-npx serve .
+cd project
+npm install
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
 ```
 
-## Important Notes
+### Backend Services
+```bash
+cd project
+npm run server       # Start Express server (port 3000)
+npm run scrape       # Run data scraping processes
+```
 
-### Content Guidelines
-- All reports contain sophisticated financial market analysis
-- Uses professional terminology and statistical measures
-- Reports include confidence levels, probability assessments, and quantitative metrics
-- Content suggests this is for institutional/professional use only
+### Database
+- **Supabase**: PostgreSQL database with migrations in `supabase/migrations/`
+- **Environment**: Requires `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
 
-### Template Maintenance
-- HTML templates contain embedded CSS for standalone distribution
-- Font loading from Google Fonts (Source Code Pro)
-- SVG logos are embedded inline for portability
-- Responsive design considerations for mobile viewing
+## Project Structure
 
-### Brand Consistency
-- wire84 branding throughout
-- Consistent color scheme and typography
-- Professional financial industry styling
-- Restriction notices for authorized distribution only
+### Main React App (`project/src/`)
+- `main.tsx` - Application entry point
+- `App.tsx` - Main router configuration
+- `pages/` - Route components (HomePage, DashboardPage, etc.)
+- `components/` - Reusable UI components
+- `lib/` - Utilities and API clients
+- `data/` - Static data files and type definitions
+
+### Key Pages
+- **HomePage**: Landing page and public content
+- **TerminalPage**: Command-line interface style analytics
+- **DashboardPage**: Main analytics dashboard
+- **HedgeFundDashboard**: Hedge fund specific analytics
+- **StockDashboard**: Stock market analysis
+- **DefenseReport**: Defense industry intelligence
+- **InsiderTradesPage**: Insider trading data
+
+### Static Templates
+- Root level HTML files serve as standalone report templates
+- Embedded CSS for email/client distribution
+- Multiple versions for different client needs
+
+## Technology Stack
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- React Router for navigation
+- Chart.js and D3.js for data visualization
+- Lucide React for icons
+
+### Backend & Data
+- Supabase for authentication and database
+- Express.js server capabilities
+- MongoDB integration
+- Puppeteer for web scraping
+- Axios for API requests
+
+### Development Tools
+- ESLint for code quality
+- TypeScript for type safety
+- PostCSS with Autoprefixer
+- Concurrent processes for development
+
+## Authentication & Security
+
+### Supabase Integration
+- Row Level Security (RLS) enabled
+- API keys stored securely in database
+- Protected routes using `AuthRequired` component
+- Environment variables for configuration
+
+### Database Schema
+- Users and authentication handled by Supabase
+- Custom tables for API keys and application data
+- Migration files track schema changes
+
+## Content & Styling
+
+### Design System
+- Dark theme with professional financial styling
+- Consistent typography using system fonts
+- Grid-based responsive layouts
+- Red accent colors (#ef4444) for critical alerts
+
+### Report Structure
+1. **Header**: Branding, title, date, distribution info
+2. **Market Sentiment**: Sentiment analysis and categorized headlines
+3. **Critical Alerts**: Risk assessments with confidence levels
+4. **Trading Ideas**: Buy/sell recommendations with conviction matrices
+5. **Deep Intelligence**: Proprietary insights from multiple data sources
+
+## Development Workflow
+
+### Environment Setup
+1. Install dependencies: `cd project && npm install`
+2. Configure Supabase environment variables
+3. Run migrations if needed
+4. Start development server: `npm run dev`
+
+### Build Process
+- Vite handles React app bundling
+- Multiple entry points for different templates
+- Static assets optimized for production
+- Proxy configuration for API integration
+
+### Data Flow
+- Real-time data from multiple financial APIs
+- Scheduled scraping processes for intelligence gathering
+- Supabase for user data and application state
+- MongoDB for analytical data storage
